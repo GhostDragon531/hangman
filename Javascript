@@ -1,0 +1,180 @@
+let words = [
+    "kangaroo",
+    "question",
+    "xylophone",
+    "terrible",
+    "challenge",
+    "humility",
+    "generosity",
+    "fantastic",
+    "philosophy",
+    "imagination",
+    "confidence",
+    "university",
+    "strength",
+    "legendary",
+    "motivation",
+    "appreciation",
+    "recognition",
+    "leadership",
+    "successful",
+    "restaurant",
+    "guarantee",
+    "peaceful",
+    "gratitude",
+    "experience",
+    "sincerity",
+    "creativity",
+    "cooperation",
+    "neighbor",
+    "abundance",
+    "curiosity",
+    "responsibility",
+    "happiness",
+    "discipline",
+    "valuable",
+    "optimism",
+    "opportunity",
+    "communication",
+    "wonderful",
+    "important",
+    "understanding",
+    "difference",
+    "knowledge",
+    "determination",
+    "enthusiasm",
+    "dangerous",
+    "forgiveness",
+    "magnificent",
+    "security"
+];
+
+
+const randomNumber = Math.floor(Math.random() * words.length);
+
+
+let randomWord = words[randomNumber].toUpperCase();
+
+console.log(randomWord)
+
+
+function convertIntoDashes(word) {
+    return word.split("").fill("-").join("")
+}
+
+let dashedWord = convertIntoDashes(randomWord)
+
+
+
+document.querySelector('.js-main').innerHTML = dashedWord;
+
+
+
+let input = document.querySelector('.search-box');
+let enterButton = document.querySelector('.enter-button');
+
+
+let dottedDashedWord = dashedWord.split("");
+
+
+let dottedRandomWord = randomWord.split("");
+
+// let updatedWord = []
+let updatedWord = convertIntoDashes(randomWord).split("");
+// console.log(randomWord)
+// console.log(updatedWord)
+let numberOfAttempts = 9;
+
+function inputValue (param) {
+    input.value = param
+    console.log(input.value)
+    let found = false;
+    let newUpdatedWord = updatedWord
+    let guess = input.value.toUpperCase();
+
+    for (let i = 0; i < dottedRandomWord.length; i++) {
+        if (dottedRandomWord[i] === guess) {
+            updatedWord[i] = guess;
+            found = true;
+        }
+
+
+
+        else {
+
+            updatedWord[i] = updatedWord[i] || "-";
+
+        }
+
+    }
+
+    if (!found) {
+        document.querySelector('.result').innerHTML = `Incorrect guess`
+
+        setTimeout(() => {
+            document.querySelector('.result').innerHTML = '';
+        }, 1500)
+        numberOfAttempts--
+    }
+    console.log(numberOfAttempts)
+
+
+
+
+    if (numberOfAttempts <= 0) {
+        alert(`The word was ${randomWord}. Please try again`)
+        location.reload()
+    }
+
+    else if (updatedWord.join("") === randomWord) {
+        document.querySelector('.js-main').innerHTML = updatedWord.join("");
+
+        document.querySelector('.green').innerHTML = 'Congratulations !!! You have gussed the word'
+
+        setTimeout(() => {
+            location.reload()
+
+        }, 2000)
+
+
+    }
+
+    else {
+
+        document.querySelector('.js-main').innerHTML = updatedWord.join("");
+
+    }
+
+    document.querySelector('.count').innerHTML = `Remaining attempts: ${numberOfAttempts}`
+
+
+
+    input.value = '';
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+enterButton.addEventListener('click', () => {
+    
+    
+
+})
+
+
+
